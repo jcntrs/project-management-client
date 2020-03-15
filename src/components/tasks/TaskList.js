@@ -4,8 +4,8 @@ import Task from './Task';
 const TaskList = () => {
 
     const tasks = [
-        { name: 'Estudiar React JS', status: true },
-        { name: 'Estudiar Node JS', status: false }
+        { id: 1, name: 'Estudiar React JS', status: true },
+        { id: 2, name: 'Estudiar Node JS', status: false }
     ];
 
     return (
@@ -14,7 +14,7 @@ const TaskList = () => {
             <ul className="listado-tareas">
                 {tasks.length === 0
                     ? <li className="tarea"><p>No hay tareas</p></li>
-                    : tasks.map(element => <Task task={element} />)
+                    : tasks.map(element => <Task key={element.id} task={element} />)
                 }
             </ul>
             <div className="center">

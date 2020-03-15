@@ -7,7 +7,7 @@ const ProjectList = () => {
 
     return (
         <ul className="listado-proyectos">
-            {projects.map(project => <Project project={project} />)}
+            {projects.map((project, index) => <Project key={index} project={project} />)}
         </ul>
     );
 

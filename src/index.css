@@ -4,6 +4,8 @@
   --gris2: #2f3848;
   --gris3: #1a202d;
   --negro: #000000;
+  --danger1: #b22b38;
+  --danger2: #dc3545;
   --headingFont: 'Raleway', sans-serif;
   --textFont: 'Roboto', sans-serif;
 }
@@ -81,6 +83,15 @@ a {
 
 .btn-primario:hover {
   background: var(--gris3);
+}
+
+.btn-danger {
+  background-color: var(--danger1);
+  color: var(--blanco);
+}
+
+.btn-danger:hover {
+  background: var(--danger2);
 }
 
 .btn-secundario {
@@ -357,4 +368,8 @@ aside {
   margin-top: 2rem;
   display: block;
   opacity: .7;
+}
+
+.center {
+  text-align: center;
 }

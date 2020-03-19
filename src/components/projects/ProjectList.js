@@ -13,7 +13,10 @@ const ProjectList = () => {
 
     return (
         <ul className="listado-proyectos">
-            {projects.map(element => <Project key={element.id} project={element} />)}
+            {projects.length > 0
+                ? projects.map(element => <Project key={element.id} project={element} />)
+                : <p>No hay proyectos, comienza creando uno.</p>
+            }
         </ul>
     );
 

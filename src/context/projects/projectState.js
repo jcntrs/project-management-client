@@ -15,9 +15,9 @@ import {
 const ProjectState = props => {
 
     const projects = [
-        { id: 1, name: 'Tienda Virtual' },
-        { id: 2, name: 'Intranet' },
-        { id: 3, name: 'Diseño de sitio web' }
+        { id: 1, name: 'React' },
+        { id: 2, name: 'Node' },
+        { id: 3, name: 'MongoDB' }
     ]
 
     const initialState = {
@@ -70,18 +70,19 @@ const ProjectState = props => {
     }
 
     return (
-        <projectContext.Provider value={{
-            form: state.form,
-            projects: state.projects,
-            formError: state.formError,
-            currentProject: state.currentProject,
-            showForm,
-            getProjects,
-            addProject,
-            showError,
-            getCurrentProject,
-            deleteProject
-        }}
+        <projectContext.Provider
+            value={{
+                form: state.form,
+                projects: state.projects,
+                formError: state.formError,
+                currentProject: state.currentProject,
+                showForm,
+                getProjects,
+                addProject,
+                showError,
+                getCurrentProject,
+                deleteProject
+            }}
         >
             {props.children}
         </projectContext.Provider>

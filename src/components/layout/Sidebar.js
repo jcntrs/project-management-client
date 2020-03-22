@@ -1,5 +1,5 @@
 import React from 'react';
-import NewProject from '../projects/newProject';
+import NewProject from '../projects/NewProject';
 import ProjectList from '../projects/ProjectList';
 
 const SideBar = () => (

@@ -3,19 +3,22 @@ import TaskContext from './TaskContext';
 import TaskReducer from './TaskReducer';
 import {
     PROJECT_TASKS,
-    ADD_TASK
+    ADD_TASK,
+    VALIDATE_TASK,
+    DELETE_tASK
 } from '../../types';
 
 const TaskState = props => {
 
     const initialState = {
         tasks: [
-            { projectId: 1, name: 'Estudiar React JS', status: true },
-            { projectId: 2, name: 'Estudiar Node JS', status: false },
-            { projectId: 2, name: 'Estudiar Express JS', status: false },
-            { projectId: 3, name: 'Estudiar MongoDB JS', status: false }
+            { id: 0, projectId: 1, name: 'Estudiar React JS', status: true },
+            { id: 1, projectId: 2, name: 'Estudiar Node JS', status: false },
+            { id: 2, projectId: 2, name: 'Estudiar Express JS', status: false },
+            { id: 3, projectId: 3, name: 'Estudiar MongoDB JS', status: false }
         ],
-        projectTasks: null
+        projectTasks: null,
+        errorTask: false
     }
 
     const [state, dispatch] = useReducer(TaskReducer, initialState);
@@ -34,13 +37,29 @@ const TaskState = props => {
         });
     }
 
+    const validateTask = () => {
+        dispatch({
+            type: VALIDATE_TASK
+        });
+    }
+
+    const deleteTask = id => {
+        dispatch({
+            type: DELETE_tASK,
+            payload: id
+        });
+    }
+
     return (
         <TaskContext.Provider
             value={{
                 tasks: state.tasks,
                 projectTasks: state.projectTasks,
+                errorTask: state.errorTask,
                 getProjectTasks,
-                addTask
+                addTask,
+                validateTask,
+                deleteTask
             }}
         >
             {props.children}

@@ -8,7 +8,7 @@ const TaskForm = () => {
     const { currentProject } = projectsContext;
 
     const tasksContext = useContext(TaskContext);
-    const { addTask } = tasksContext;
+    const { errorTask, getProjectTasks, addTask, validateTask } = tasksContext;
 
     const [task, setTask] = useState({ name: '' });
     const { name } = task;
@@ -22,9 +22,15 @@ const TaskForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        task.projectId = project.id;
-        task.status = false;
-        addTask(task);
+        if (name.trim() === '') {
+            validateTask();
+        } else {
+            task.projectId = project.id;
+            task.status = false;
+            addTask(task);
+            getProjectTasks(project.id);
+            setTask({ name: '' });
+        }
     }
 
     return (
@@ -50,6 +56,7 @@ const TaskForm = () => {
                             />
                         </div>
                     </form>
+                    {errorTask && <p className="mensaje error">El nombre de la tarea es obligatorio.</p>}
                 </div>
             }
         </>

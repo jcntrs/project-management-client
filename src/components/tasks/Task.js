@@ -9,11 +9,20 @@ const Task = ({ task }) => {
     const [project] = currentProject;
 
     const tasksContext = useContext(TaskContext);
-    const { deleteTask, getProjectTasks } = tasksContext;
+    const { deleteTask, getProjectTasks, changeTaskStatus, saveCurrentTask } = tasksContext;
 
     const handleClick = id => {
         deleteTask(id);
         getProjectTasks(project.id);
+    }
+
+    const changeStatus = task => {
+        task.status === true ? task.status = false : task.status = true;
+        changeTaskStatus(task);
+    }
+
+    const selectTask = task => {
+        saveCurrentTask(task);
     }
 
     return (
@@ -21,12 +30,12 @@ const Task = ({ task }) => {
             <p>{task.name}</p>
             <div className="estado">
                 {task.status
-                    ? <button className="completo" type="button">Completado</button>
-                    : <button className="incompleto">Incompleto</button>
+                    ? <button className="completo" type="button" onClick={() => changeStatus(task)}>Completado</button>
+                    : <button className="incompleto" onClick={() => changeStatus(task)}>Incompleto</button>
                 }
             </div>
             <div className="acciones">
-                <button className="btn btn-primario" type="button">Editar</button>
+                <button className="btn btn-primario" type="button" onClick={() => selectTask(task)}>Editar</button>
                 <button
                     className="btn btn-secundario"
                     type="button"

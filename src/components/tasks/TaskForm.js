@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import projectContext from '../../context/projects/projectContext';
 import TaskContext from '../../context/tasks/TaskContext';
 
@@ -8,10 +8,14 @@ const TaskForm = () => {
     const { currentProject } = projectsContext;
 
     const tasksContext = useContext(TaskContext);
-    const { errorTask, getProjectTasks, addTask, validateTask } = tasksContext;
+    const { currentTask, errorTask, getProjectTasks, addTask, validateTask, updateTask, cleanTask } = tasksContext;
 
     const [task, setTask] = useState({ name: '' });
     const { name } = task;
+
+    useEffect(() => {
+        currentTask && setTask(currentTask);
+    }, [currentTask]);
 
     if (!currentProject) return null;
     const [project] = currentProject;
@@ -22,15 +26,20 @@ const TaskForm = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        if (name.trim() === '') {
-            validateTask();
+        if (currentTask === null) {
+            if (name.trim() === '') {
+                validateTask();
+            } else {
+                task.projectId = project.id;
+                task.status = false;
+                addTask(task);
+            }
         } else {
-            task.projectId = project.id;
-            task.status = false;
-            addTask(task);
-            getProjectTasks(project.id);
-            setTask({ name: '' });
+            updateTask(task);
+            cleanTask();
         }
+        getProjectTasks(project.id);
+        setTask({ name: '' });
     }
 
     return (
@@ -52,7 +61,7 @@ const TaskForm = () => {
                             <input
                                 className="btn btn-primario btn-submit btn-block"
                                 type="submit"
-                                value="Agregar Tarea"
+                                value={currentTask ? 'Editar Tarea' : 'Agregar Tarea'}
                             />
                         </div>
                     </form>

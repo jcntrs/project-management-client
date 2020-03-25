@@ -1,11 +1,16 @@
 import React, { useReducer } from 'react';
 import TaskContext from './TaskContext';
 import TaskReducer from './TaskReducer';
+import { v4 as uuidv4 } from 'uuid';
 import {
     PROJECT_TASKS,
     ADD_TASK,
     VALIDATE_TASK,
-    DELETE_tASK
+    DELETE_tASK,
+    TASK_STATUS,
+    CURRENT_TASK,
+    UPDATE_TASK,
+    CLEAN_TASK
 } from '../../types';
 
 const TaskState = props => {
@@ -18,6 +23,7 @@ const TaskState = props => {
             { id: 3, projectId: 3, name: 'Estudiar MongoDB JS', status: false }
         ],
         projectTasks: null,
+        currentTask: null,
         errorTask: false
     }
 
@@ -31,6 +37,7 @@ const TaskState = props => {
     }
 
     const addTask = task => {
+        task.id = uuidv4();
         dispatch({
             type: ADD_TASK,
             payload: task
@@ -50,16 +57,48 @@ const TaskState = props => {
         });
     }
 
+    const changeTaskStatus = task => {
+        dispatch({
+            type: TASK_STATUS,
+            payload: task
+        });
+    }
+
+    const saveCurrentTask = task => {
+        dispatch({
+            type: CURRENT_TASK,
+            payload: task
+        });
+    }
+
+    const updateTask = task => {
+        dispatch({
+            type: UPDATE_TASK,
+            payload: task
+        });
+    }
+
+    const cleanTask = () => {
+        dispatch({
+            type: CLEAN_TASK
+        });
+    }
+
     return (
         <TaskContext.Provider
             value={{
                 tasks: state.tasks,
                 projectTasks: state.projectTasks,
+                currentTask: state.currentTask,
                 errorTask: state.errorTask,
                 getProjectTasks,
                 addTask,
                 validateTask,
-                deleteTask
+                deleteTask,
+                changeTaskStatus,
+                saveCurrentTask,
+                updateTask,
+                cleanTask
             }}
         >
             {props.children}

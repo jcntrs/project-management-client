@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
+import AlertContext from '../../context/alerts/AlertContext';
 
 const NewAccount = () => {
+
+    const alertContext = useContext(AlertContext);
+    const { alert, showAlert } = alertContext;
     const [user, setUser] = useState({ username: '', email: '', password: '', confirmPassword: '' });
     const { username, email, password, confirmPassword } = user;
 
@@ -11,10 +15,23 @@ const NewAccount = () => {
 
     const handleSubmit = event => {
         event.preventDefault();
+        if (username.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
+            showAlert('Todos los campos son obligatorios', 'alerta-error');
+            return;
+        }
+        if (password.length < 6) {
+            showAlert('El password debe ser al menos 6 caracteres', 'alerta-error');
+            return;
+        }
+        if (password !== confirmPassword) {
+            showAlert('Las contraseñas deben ser iguales', 'alerta-error');
+            return;
+        }
     }
 
     return (
         <div className="form-usuario">
+            {alert && <div className={`alerta ${alert.category}`}>{alert.msg}</div>}
             <div className="contenedor-form sombra-dark">
                 <h1>Obtener Cuenta</h1>
                 <form onSubmit={handleSubmit}>
@@ -70,6 +87,7 @@ const NewAccount = () => {
             </div>
         </div>
     );
+
 }
 
 export default NewAccount;

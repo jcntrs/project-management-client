@@ -6,12 +6,13 @@ import Projects from './components/projects/Projects';
 import ProjectState from './context/projects/projectState';
 import TaskState from './context/tasks/TaskState';
 import AlertState from './context/alerts/AlertState';
+import AuthState from './context/authentication/AuthState';
 
-const App = () => {
-    return (
-        <ProjectState>
-            <TaskState>
-                <AlertState>
+const App = () => (
+    <ProjectState>
+        <TaskState>
+            <AlertState>
+                <AuthState>
                     <BrowserRouter>
                         <Switch>
                             <Route exact path="/" component={Login} />
@@ -19,10 +20,11 @@ const App = () => {
                             <Route exact path="/proyectos" component={Projects} />
                         </Switch>
                     </BrowserRouter>
-                </AlertState>
-            </TaskState>
-        </ProjectState>
-    );
-}
+                </AuthState>
+            </AlertState>
+        </TaskState>
+    </ProjectState>
+);
+
 
 export default App;

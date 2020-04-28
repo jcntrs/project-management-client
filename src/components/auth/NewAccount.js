@@ -18,11 +18,6 @@ const NewAccount = props => {
         setUser({ ...user, [event.target.name]: event.target.value });
     }
 
-    useEffect(() => {
-        authenticated && props.history.push('/proyectos');
-        message && showAlert(message.msg, message.category);
-    }, [authenticated, message, props.history]);
-
     const handleSubmit = event => {
         event.preventDefault();
         if (username.trim() === '' || email.trim() === '' || password.trim() === '' || confirmPassword.trim() === '') {
@@ -39,6 +34,11 @@ const NewAccount = props => {
         }
         userRegister({ name: username, email, password });
     }
+
+    useEffect(() => {
+        authenticated && props.history.push('/proyectos');
+        message && showAlert(message.msg, message.category);
+    }, [authenticated, message, props.history]);
 
     return (
         <div className="form-usuario">

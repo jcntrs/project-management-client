@@ -9,6 +9,7 @@ import {
 
 export default (state, action) => {
     switch (action.type) {
+        case SUCCESSFUL_LOGIN:
         case SUCCESSFUL_REGISTRATION:
             localStorage.setItem('token', action.payload.token);
             return {
@@ -22,7 +23,24 @@ export default (state, action) => {
             return {
                 ...state,
                 token: null,
+                authenticated: null,
+                user: null,
                 message: action.payload
+            }
+        case GET_USER:
+            return {
+                ...state,
+                token: localStorage.getItem('token'),
+                authenticated: true,
+                user: action.payload
+            }
+        case SIGN_OFF:
+            return {
+                ...state,
+                token: null,
+                authenticated: null,
+                user: null,
+                message: null
             }
         default:
             return state;

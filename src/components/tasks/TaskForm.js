@@ -30,15 +30,14 @@ const TaskForm = () => {
             if (name.trim() === '') {
                 validateTask();
             } else {
-                task.projectId = project.id;
-                task.status = false;
+                task.project = project._id;
                 addTask(task);
             }
         } else {
             updateTask(task);
             cleanTask();
         }
-        getProjectTasks(project.id);
+        getProjectTasks(project._id);
         setTask({ name: '' });
     }
 

@@ -31,6 +31,7 @@ const Login = props => {
     useEffect(() => {
         authenticated && props.history.push('/proyectos');
         message && showAlert(message.msg, message.category);
+        // eslint-disable-next-line
     }, [authenticated, message, props.history]);
 
     return (

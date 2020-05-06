@@ -12,12 +12,13 @@ const TaskList = () => {
     const tasksContext = useContext(TaskContext);
     const { projectTasks } = tasksContext;
 
-    if (!currentProject) return <h2>Selecciona un proyecto</h2>;
+    if (!currentProject)
+        return <h2>Selecciona un proyecto</h2>;
 
     const [project] = currentProject;
 
     const handleClick = () => {
-        deleteProject(project.id);
+        deleteProject(project._id);
     }
 
     return (

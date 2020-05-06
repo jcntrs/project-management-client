@@ -20,7 +20,7 @@ const Project = ({ project }) => {
             <button
                 className="btn btn-blank"
                 type="button"
-                onClick={() => handleClick(project.id)}
+                onClick={() => handleClick(project._id)}
             >
                 {project.name}
             </button>

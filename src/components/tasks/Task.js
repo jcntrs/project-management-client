@@ -9,16 +9,16 @@ const Task = ({ task }) => {
     const [project] = currentProject;
 
     const tasksContext = useContext(TaskContext);
-    const { deleteTask, getProjectTasks, changeTaskStatus, saveCurrentTask } = tasksContext;
+    const { deleteTask, getProjectTasks, updateTask, saveCurrentTask } = tasksContext;
 
     const handleClick = id => {
-        deleteTask(id);
+        deleteTask(id, project._id);
         getProjectTasks(project.id);
     }
 
     const changeStatus = task => {
         task.status === true ? task.status = false : task.status = true;
-        changeTaskStatus(task);
+        updateTask(task);
     }
 
     const selectTask = task => {
@@ -39,7 +39,7 @@ const Task = ({ task }) => {
                 <button
                     className="btn btn-secundario"
                     type="button"
-                    onClick={() => handleClick(task.id)}
+                    onClick={() => handleClick(task._id)}
                 >
                     Eliminar
                 </button>

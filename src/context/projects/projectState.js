@@ -10,7 +10,8 @@ import {
     VALIDATE_FORM,
     CURRENT_PROJECT,
     DELETE_PROJECT,
-    PROJECT_ERROR
+    PROJECT_ERROR,
+    RESET_PROJECT_STATE
 } from '../../types';
 
 
@@ -94,6 +95,12 @@ const ProjectState = props => {
         }
     }
 
+    const resetProjectState = () => {
+        dispatch({
+            type: RESET_PROJECT_STATE,
+        });
+    }
+
     return (
         <projectContext.Provider
             value={{
@@ -107,7 +114,8 @@ const ProjectState = props => {
                 addProject,
                 showError,
                 getCurrentProject,
-                deleteProject
+                deleteProject,
+                resetProjectState
             }}
         >
             {props.children}

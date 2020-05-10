@@ -5,7 +5,8 @@ import {
     VALIDATE_FORM,
     CURRENT_PROJECT,
     DELETE_PROJECT,
-    PROJECT_ERROR
+    PROJECT_ERROR,
+    RESET_PROJECT_STATE
 } from '../../types';
 
 export default (state, action) => {
@@ -18,7 +19,8 @@ export default (state, action) => {
         case GET_PROJECTS:
             return {
                 ...state,
-                projects: action.payload
+                projects: action.payload,
+                currentProject: null
             }
         case ADD_PROJECT:
             return {
@@ -47,6 +49,14 @@ export default (state, action) => {
             return {
                 ...state,
                 message: action.payload
+            }
+        case RESET_PROJECT_STATE:
+            return {
+                form: false,
+                projects: [],
+                formError: false,
+                currentProject: null,
+                message: null
             }
 
         default:

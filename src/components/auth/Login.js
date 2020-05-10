@@ -49,8 +49,6 @@ const Login = props => {
         // eslint-disable-next-line
     }, [authenticated, message, props.history]);
 
-
-
     return (
         <>
             {alert && <div className={`alerta ${alert.category}`}>{alert.msg}</div>}

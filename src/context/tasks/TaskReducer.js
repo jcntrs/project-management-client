@@ -5,7 +5,8 @@ import {
     DELETE_tASK,
     CURRENT_TASK,
     UPDATE_TASK,
-    CLEAN_TASK
+    CLEAN_TASK,
+    RESET_TASK_STATE
 } from '../../types';
 
 export default (state, action) => {
@@ -45,6 +46,12 @@ export default (state, action) => {
             return {
                 ...state,
                 currentTask: null
+            }
+        case RESET_TASK_STATE:
+            return {
+                projectTasks: [],
+                currentTask: null,
+                errorTask: false
             }
 
         default:

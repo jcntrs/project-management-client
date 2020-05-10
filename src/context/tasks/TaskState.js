@@ -9,7 +9,8 @@ import {
     DELETE_tASK,
     CURRENT_TASK,
     UPDATE_TASK,
-    CLEAN_TASK
+    CLEAN_TASK,
+    RESET_TASK_STATE
 } from '../../types';
 
 const TaskState = props => {
@@ -36,7 +37,7 @@ const TaskState = props => {
 
     const addTask = async task => {
         try {
-            const result = await axiosClient.post('/api/tasks', task);
+            await axiosClient.post('/api/tasks', task);
             dispatch({
                 type: ADD_TASK,
                 payload: task
@@ -89,6 +90,12 @@ const TaskState = props => {
         });
     }
 
+    const resetTaskState = () => {
+        dispatch({
+            type: RESET_TASK_STATE,
+        });
+    }
+
     return (
         <TaskContext.Provider
             value={{
@@ -101,7 +108,8 @@ const TaskState = props => {
                 deleteTask,
                 saveCurrentTask,
                 updateTask,
-                cleanTask
+                cleanTask,
+                resetTaskState
             }}
         >
             {props.children}

@@ -13,7 +13,7 @@ const TaskList = () => {
     const { projectTasks } = tasksContext;
 
     if (!currentProject)
-        return <h2>Selecciona un proyecto</h2>;
+        return <h2 className="green-color">Selecciona un proyecto</h2>;
 
     const [project] = currentProject;
 
@@ -23,7 +23,7 @@ const TaskList = () => {
 
     return (
         <>
-            <h2>Proyecto: {project.name}</h2>
+            <h2>Proyecto: <span className="green-color">{project.name}</span></h2>
             <ul className="listado-tareas">
                 {projectTasks.length === 0 ?
                     <li className="tarea"><p>No hay tareas</p></li>

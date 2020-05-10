@@ -23,30 +23,26 @@ const TaskState = props => {
     const [state, dispatch] = useReducer(TaskReducer, initialState);
 
     const getProjectTasks = async project => {
-        console.log(project)
         try {
             const result = await axiosClient.get('/api/tasks', { params: { project } });
-            console.log(result)
             dispatch({
                 type: PROJECT_TASKS,
                 payload: result.data.currentTasks
             });
         } catch (error) {
-            console.log(error)
+ 
         }
     }
 
     const addTask = async task => {
-        console.log(task)
         try {
             const result = await axiosClient.post('/api/tasks', task);
-            console.log(result)
             dispatch({
                 type: ADD_TASK,
                 payload: task
             });
         } catch (error) {
-            console.log(error)
+
         }
     }
 
@@ -57,7 +53,6 @@ const TaskState = props => {
     }
 
     const deleteTask = async (id, project) => {
-        console.log(id, project)
         try {
             await axiosClient.delete(`/api/tasks/${id}`, { params: { project } });
             dispatch({
@@ -65,20 +60,19 @@ const TaskState = props => {
                 payload: id
             });
         } catch (error) {
-            console.log(error)
+    
         }
     }
 
     const updateTask = async task => {
         try {
             const result = await axiosClient.put(`/api/tasks/${task._id}`, task);
-            console.log(result)
             dispatch({
                 type: UPDATE_TASK,
                 payload: result.data.currentTask
             });
         } catch (error) {
-            console.log(error)
+          
         }
     }
 

@@ -382,7 +382,6 @@ aside {
   border-radius: 1rem;
   font-family: var(--headingFont);
   font-weight: 600;
-  text-transform: uppercase;
   font-size: 2.2rem;
   text-align: center;
   width: 100%;
@@ -390,10 +389,10 @@ aside {
 
 @media (min-width:768px) {
   .alerta {
-      width: auto;
-      top: 30px;
-      right: 10px;
-      left: auto;
+    width: auto;
+    top: 30px;
+    right: 10px;
+    left: auto;
   }
 }
 
@@ -403,10 +402,18 @@ aside {
 }
 
 .alerta-error {
-  background-color: rgb(230, 78, 78);
+  background-color: rgb(170, 0, 0);
   color: var(--blanco);
 }
 
 .cerrar-sesion {
   color: var(--blanco);
+}
+
+.green-color {
+  color: #29c18d
+}
+
+.green-color:hover {
+  color: #38d39f
 }

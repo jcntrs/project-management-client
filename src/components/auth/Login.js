@@ -2,6 +2,10 @@ import React, { useState, useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AlertContext from '../../context/alerts/AlertContext';
 import AuthContext from '../../context/authentication/AuthContext';
+import avatar from '../../assets/img/avatar.svg';
+import bg from '../../assets/img/bg.svg';
+import wave from '../../assets/img/wave.png';
+import '../../assets/css/login.css';
 
 const Login = props => {
 
@@ -23,8 +27,19 @@ const Login = props => {
         if (email.trim() === '' || password.trim() === '') {
             showAlert('Todos los campos son obligatorios', 'alerta-error');
             return;
-        } else {
-            logIn({ email, password });
+        }
+        logIn({ email, password });
+    }
+
+    const handleFocus = event => {
+        const parent = event.target.parentNode.parentNode;
+        parent.classList.add("focus");
+    }
+
+    const handleBlur = event => {
+        const parent = event.target.parentNode.parentNode;
+        if (event.target.value === '') {
+            parent.classList.remove("focus");
         }
     }
 
@@ -34,41 +49,62 @@ const Login = props => {
         // eslint-disable-next-line
     }, [authenticated, message, props.history]);
 
+
+
     return (
-        <div className="form-usuario">
+        <>
             {alert && <div className={`alerta ${alert.category}`}>{alert.msg}</div>}
-            <div className="contenedor-form sombra-dark">
-                <h1>Iniciar Sesión</h1>
-                <form onSubmit={handleSubmit}>
-                    <div className="campo-form">
-                        <label htmlFor="inpEmail">E-mail</label>
-                        <input
-                            id="inpEmail"
-                            type="email"
-                            name="email"
-                            placeholder="Ingresa tu e-mail"
-                            value={email}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="campo-form">
-                        <label htmlFor="inpPassword">Contraseña</label>
-                        <input
-                            id="inpPassword"
-                            type="password"
-                            name="password"
-                            placeholder="Ingresa tu contraseña"
-                            value={password}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div className="campo-form">
-                        <input className="btn btn-primario btn-block" type="submit" value="Iniciar Sesión" />
-                    </div>
-                </form>
-                <Link to="/nueva-cuenta" className="enlace-cuenta">Obtener Cuenta</Link>
+            <img className="wave" src={wave} alt="wave" />
+            <div className="container">
+                <div className="img">
+                    <img src={bg} alt="bg" />
+                </div>
+                <div className="login-content">
+                    <form onSubmit={handleSubmit} className="login-form">
+                        <img src={avatar} alt="avatar" />
+                        <h2 className="title">Bienvenido</h2>
+                        <div className="input-div one">
+                            <div className="i">
+                                <i className="fas fa-user"></i>
+                            </div>
+                            <div className="div">
+                                <h5>Nombre de usuario</h5>
+                                <input
+                                    id="inpEmail"
+                                    className="input"
+                                    type="email"
+                                    name="email"
+                                    value={email}
+                                    onChange={handleChange}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                        </div>
+                        <div className="input-div pass">
+                            <div className="i">
+                                <i className="fas fa-lock"></i>
+                            </div>
+                            <div className="div">
+                                <h5>Contraseña</h5>
+                                <input
+                                    id="inpPassword"
+                                    className="input"
+                                    type="password"
+                                    name="password"
+                                    value={password}
+                                    onChange={handleChange}
+                                    onFocus={handleFocus}
+                                    onBlur={handleBlur}
+                                />
+                            </div>
+                        </div>
+                        <Link to="/nueva-cuenta" className="link-new-account">Crea tu Cuenta</Link>
+                        <input className="btn-login" type="submit" value="Iniciar Sesión" />
+                    </form>
+                </div>
             </div>
-        </div>
+        </>
     );
 
 }

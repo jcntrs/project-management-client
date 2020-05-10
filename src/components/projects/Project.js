@@ -18,11 +18,11 @@ const Project = ({ project }) => {
     return (
         <li>
             <button
-                className="btn btn-blank"
+                className="btn btn-blank green-color"
                 type="button"
                 onClick={() => handleClick(project._id)}
             >
-                {project.name}
+                <b><i className="fas fa-tasks"></i>&nbsp;&nbsp;&nbsp;{project.name}</b>
             </button>
         </li>
     );

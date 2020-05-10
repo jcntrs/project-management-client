@@ -28,15 +28,13 @@ const AuthState = ({ children }) => {
     const userRegister = async userData => {
         try {
             const response = await clientAxios.post('/api/users', userData);
-            console.log(response)
             dispatch({
                 type: SUCCESSFUL_REGISTRATION,
                 payload: response.data
             });
             getAuthenticatedUser();
         } catch (error) {
-            console.log(error)
-            console.log(error.response)
+            /* console.log(error.response) */
             const alert = {
                 msg: error.response.data.msg,
                 category: 'alerta-error'
@@ -51,14 +49,13 @@ const AuthState = ({ children }) => {
     const logIn = async userData => {
         try {
             const response = await axiosClient.post('/api/authentication', userData);
-            console.log(response)
             dispatch({
                 type: SUCCESSFUL_LOGIN,
                 payload: response.data
             });
             getAuthenticatedUser();
         } catch (error) {
-            console.log(error.response.data.msg)
+            /* console.log(error.response.data.msg) */
             const alert = {
                 msg: error.response.data.msg,
                 category: 'alerta-error'
@@ -77,13 +74,11 @@ const AuthState = ({ children }) => {
         }
         try {
             const response = await clientAxios.get('/api/authentication');
-            console.log(response)
             dispatch({
                 type: GET_USER,
                 payload: response.data.user
             });
         } catch (error) {
-            console.log(error.response)
             dispatch({
                 type: LOGIN_ERROR
             });

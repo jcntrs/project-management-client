@@ -34,7 +34,7 @@ const ProjectList = () => {
                     )}
                 </TransitionGroup>
                 :
-                <p>No hay proyectos, comienza creando uno.</p>
+                <p className="green-color">No hay proyectos, comienza creando uno.</p>
             }
         </ul>
     );

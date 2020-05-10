@@ -37,7 +37,6 @@ const ProjectState = props => {
         token && authToken(token);
         try {
             const result = await axiosClient.get('/api/projects');
-            console.log(result)
             dispatch({
                 type: GET_PROJECTS,
                 payload: result.data.projectsByUser
@@ -54,7 +53,6 @@ const ProjectState = props => {
     const addProject = async project => {
         try {
             const result = await axiosClient.post('/api/projects', project);
-            console.log(result)
             dispatch({
                 type: ADD_PROJECT,
                 payload: result.data
